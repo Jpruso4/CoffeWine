@@ -42,9 +42,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
-        btnCatalogo = new javax.swing.JButton();
+        btnGuia = new javax.swing.JButton();
         btnIniciarSesion = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
+        btnCatalogo1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -71,14 +72,19 @@ public class VistaPrincipal extends javax.swing.JFrame {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png"))); // NOI18N
         lblLogo.setText("CoffeWine");
 
-        btnCatalogo.setBackground(new java.awt.Color(188, 170, 164));
-        btnCatalogo.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        btnCatalogo.setForeground(new java.awt.Color(0, 0, 0));
-        btnCatalogo.setText("Catálogo");
-        btnCatalogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCatalogo.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGuia.setBackground(new java.awt.Color(188, 170, 164));
+        btnGuia.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        btnGuia.setForeground(new java.awt.Color(0, 0, 0));
+        btnGuia.setText("Guía");
+        btnGuia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCatalogoMouseClicked(evt);
+                btnGuiaMouseClicked(evt);
+            }
+        });
+        btnGuia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuiaActionPerformed(evt);
             }
         });
 
@@ -104,6 +110,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCatalogo1.setBackground(new java.awt.Color(188, 170, 164));
+        btnCatalogo1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        btnCatalogo1.setForeground(new java.awt.Color(0, 0, 0));
+        btnCatalogo1.setText("Catálogo");
+        btnCatalogo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCatalogo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCatalogo1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -111,11 +128,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
-                .addComponent(btnCatalogo)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addComponent(btnGuia)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCatalogo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnIniciarSesion)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrarse)
                 .addContainerGap())
         );
@@ -125,9 +144,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCatalogo)
+                    .addComponent(btnGuia)
                     .addComponent(btnIniciarSesion)
-                    .addComponent(btnRegistrarse))
+                    .addComponent(btnRegistrarse)
+                    .addComponent(btnCatalogo1))
                 .addContainerGap())
         );
 
@@ -158,11 +178,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCatalogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCatalogoMouseClicked
-        VistaCatalogo catalogo = new VistaCatalogo();
-        catalogo.setVisible(true);
+    private void btnGuiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuiaMouseClicked
+        VistaGuia guia = new VistaGuia();
+        guia.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnCatalogoMouseClicked
+    }//GEN-LAST:event_btnGuiaMouseClicked
 
     private void btnIniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseClicked
         VistaIniciarSesion iniciarSesion = new VistaIniciarSesion();
@@ -175,6 +195,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
         registrarse.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRegistrarseMouseClicked
+
+    private void btnCatalogo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCatalogo1MouseClicked
+        VistaCatalogo catalogo =  new VistaCatalogo();
+        catalogo.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnCatalogo1MouseClicked
+
+    private void btnGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuiaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,7 +242,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCatalogo;
+    private javax.swing.JButton btnCatalogo1;
+    private javax.swing.JButton btnGuia;
     private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JPanel jPanel1;
