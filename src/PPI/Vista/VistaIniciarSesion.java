@@ -5,7 +5,10 @@
  */
 package PPI.Vista;
 
+import PPI.Controladores.ControladorIniciarSesion;
+import PPI.Modelos.ModeloUsuario;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,17 +16,22 @@ import javax.swing.ImageIcon;
  */
 public class VistaIniciarSesion extends javax.swing.JFrame {
 
+    ControladorIniciarSesion controlador;
+
     /**
      * Creates new form VistaIniciarSesion
      */
     public VistaIniciarSesion() {
-        initComponents();
         
+        initComponents();
+        //Agregamos la locación de donde sale el proyecto y le agregamos un icono
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
+        //Agregamos un placeholder a los campos de textos que tenemos
         TextPrompt placeHolder = new TextPrompt("Ingrese la contraseña registrada", txtContrasena);
         placeHolder = new TextPrompt("Ingrese el correo electrónico registrado", txtCorreoElectronico);
-        
+        controlador = new ControladorIniciarSesion();
+
     }
 
     /**
@@ -118,6 +126,11 @@ public class VistaIniciarSesion extends javax.swing.JFrame {
         btnIniciarSesion.setBackground(new java.awt.Color(93, 64, 55));
         btnIniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
         btnIniciarSesion.setText("Iniciar Sesión");
+        btnIniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnIniciarSesionMouseClicked(evt);
+            }
+        });
 
         txtContrasena.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         txtContrasena.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -215,6 +228,30 @@ public class VistaIniciarSesion extends javax.swing.JFrame {
     private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContrasenaActionPerformed
+
+    private void btnIniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseClicked
+        ModeloUsuario usuario = new ModeloUsuario();
+        usuario.setCorreo(txtCorreoElectronico.getText());
+        usuario.setContrasena(String.valueOf(txtContrasena.getPassword()));
+        
+        if (txtCorreoElectronico.getText().isEmpty() || String.valueOf(txtContrasena.getPassword()).isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Hay campos obligatorios sin llenar(*)", "INICIAR SESIÓN", JOptionPane.ERROR_MESSAGE);
+        } else {
+            boolean respuesta = controlador.iniciarSesion(usuario);
+
+            if (respuesta == true) {
+                JOptionPane.showMessageDialog(null, "Bienvenido a PoliBooks", "INICIAR SESIÓN", JOptionPane.INFORMATION_MESSAGE);
+                VistaPrincipal principal = new VistaPrincipal();
+                principal.setVisible(true);
+                this.dispose();
+            } else {
+                if (respuesta == false) {
+                    JOptionPane.showMessageDialog(null, "Los campos ingresados son incorrectos", "INICIAR SESIÓN", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_btnIniciarSesionMouseClicked
 
     /**
      * @param args the command line arguments
