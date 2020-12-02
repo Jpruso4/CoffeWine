@@ -11,7 +11,6 @@ public class ModeloSesion {
     int tipoUsuario;
     String Nick;
     String Correo;
-    String gonorrea;
 
     public boolean isSesionActiva() {
         return sesionActiva;
