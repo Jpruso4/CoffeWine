@@ -262,7 +262,14 @@ public class VistaRegistrarse extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Los camplos ingresados son invalidos", "REGISTRARSE", JOptionPane.ERROR_MESSAGE);
             }
+            if (respuesta == true) {
+                JOptionPane.showMessageDialog(null, "El usuario ha sido creado con éxito", "REGISTRATE", JOptionPane.INFORMATION_MESSAGE);
+                VistaPrincipal principal = new VistaPrincipal();
+                principal.setVisible(true);
+                this.dispose();
+            }
         }
+
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     /**

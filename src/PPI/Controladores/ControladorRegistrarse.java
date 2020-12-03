@@ -6,7 +6,6 @@
 package PPI.Controladores;
 
 import PPI.Modelos.ModeloUsuario;
-import PPI.Modelos.ModeloUsuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
@@ -18,9 +17,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  *
  * @author Personal
