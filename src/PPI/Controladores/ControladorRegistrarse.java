@@ -17,12 +17,14 @@ import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Personal
  */
 public class ControladorRegistrarse {
-        public File archivo;
+
+    public File archivo;
     Gson gson;
 
     public ControladorRegistrarse() {
@@ -43,8 +45,10 @@ public class ControladorRegistrarse {
 
             if (listFromGson.size() == 0) {
                 usuario.setIdUsuario(1);
+                usuario.setTipoUsuario(2);
             } else {
                 usuario.setIdUsuario(listFromGson.get(listFromGson.size() - 1).getIdUsuario() + 1);
+                usuario.setTipoUsuario(2);
             }
 
             listFromGson.add(usuario);
@@ -77,6 +81,7 @@ public class ControladorRegistrarse {
         }
         return cadenaADevolver;
     }
+
     public boolean validarContrasena(ModeloUsuario usuario) {
         return usuario.getContrasena().matches("^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$");
     }

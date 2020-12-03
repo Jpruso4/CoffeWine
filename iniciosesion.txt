@@ -1,0 +1,1 @@
+{"sesionActiva":false,"idUsuario":0,"tipoUsuario":0}

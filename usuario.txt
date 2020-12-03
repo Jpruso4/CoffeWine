@@ -1,0 +1,1 @@
+[{"idUsuario":1,"tipoUsuario":2,"correo":"juan@gmail.com","nick":"Jpruso4","contrasena":"Juanpa44"}]

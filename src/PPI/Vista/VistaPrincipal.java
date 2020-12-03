@@ -5,9 +5,13 @@
  */
 package PPI.Vista;
 
+import PPI.Controladores.ControladorPrincipal;
+import PPI.Modelos.ModeloSesion;
+import PPI.Utils.Sesion;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.io.File;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -17,16 +21,34 @@ import javax.swing.ImageIcon;
  */
 public class VistaPrincipal extends javax.swing.JFrame {
 
+    public File inicio;
+    ControladorPrincipal controlador;
+    boolean respuestaSesion;
+
     /**
      * Creates new form VistaPrincipal
      */
     public VistaPrincipal() {
         initComponents();
 
+        inicio = new File("iniciosesion.txt");
+
+        controlador = new ControladorPrincipal(this);
+        ModeloSesion sesion = new ModeloSesion();
+
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
         ImageIcon icon = new ImageIcon(System.getProperty("/Imagenes/grano-de-cafe.png"));
         Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        respuestaSesion = controlador.VerificarSesion(sesion);
+
+        if (respuestaSesion) {
+            this.btnDerecha.setText("Cerrar Sesión");
+            this.btnIzquierda.setText("Mis pedidos");
+        } else {
+            this.btnDerecha.setText("Regístrate");
+            this.btnIzquierda.setText("Iniciar Sesión");
+        }
     }
 
     /**
@@ -43,8 +65,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         btnGuia = new javax.swing.JButton();
-        btnIniciarSesion = new javax.swing.JButton();
-        btnRegistrarse = new javax.swing.JButton();
+        btnIzquierda = new javax.swing.JButton();
+        btnDerecha = new javax.swing.JButton();
         btnCatalogo1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -88,25 +110,25 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnIniciarSesion.setBackground(new java.awt.Color(188, 170, 164));
-        btnIniciarSesion.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        btnIniciarSesion.setForeground(new java.awt.Color(0, 0, 0));
-        btnIniciarSesion.setText("Iniciar Sesión");
-        btnIniciarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnIniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnIzquierda.setBackground(new java.awt.Color(188, 170, 164));
+        btnIzquierda.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        btnIzquierda.setForeground(new java.awt.Color(0, 0, 0));
+        btnIzquierda.setText("Iniciar Sesión");
+        btnIzquierda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIzquierda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnIniciarSesionMouseClicked(evt);
+                btnIzquierdaMouseClicked(evt);
             }
         });
 
-        btnRegistrarse.setBackground(new java.awt.Color(188, 170, 164));
-        btnRegistrarse.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        btnRegistrarse.setForeground(new java.awt.Color(0, 0, 0));
-        btnRegistrarse.setText("Regístrate");
-        btnRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegistrarse.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnDerecha.setBackground(new java.awt.Color(188, 170, 164));
+        btnDerecha.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        btnDerecha.setForeground(new java.awt.Color(0, 0, 0));
+        btnDerecha.setText("Regístrate");
+        btnDerecha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDerecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistrarseMouseClicked(evt);
+                btnDerechaMouseClicked(evt);
             }
         });
 
@@ -133,9 +155,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCatalogo1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnIniciarSesion)
+                .addComponent(btnIzquierda)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRegistrarse)
+                .addComponent(btnDerecha)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -145,8 +167,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuia)
-                    .addComponent(btnIniciarSesion)
-                    .addComponent(btnRegistrarse)
+                    .addComponent(btnIzquierda)
+                    .addComponent(btnDerecha)
                     .addComponent(btnCatalogo1))
                 .addContainerGap())
         );
@@ -184,20 +206,36 @@ public class VistaPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnGuiaMouseClicked
 
-    private void btnIniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseClicked
-        VistaIniciarSesion iniciarSesion = new VistaIniciarSesion();
-        iniciarSesion.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnIniciarSesionMouseClicked
+    private void btnIzquierdaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIzquierdaMouseClicked
+        if (respuestaSesion) {
+            VistaMisReservas reservas = new VistaMisReservas();
+            reservas.setVisible(true);
+            this.dispose();
+        } else {
+            VistaIniciarSesion iniciarSesion = new VistaIniciarSesion();
+            iniciarSesion.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnIzquierdaMouseClicked
 
-    private void btnRegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseClicked
-        VistaRegistrarse registrarse =  new VistaRegistrarse();
-        registrarse.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnRegistrarseMouseClicked
+    private void btnDerechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDerechaMouseClicked
+        if (respuestaSesion) {
+            ModeloSesion sesion = new ModeloSesion();
+            sesion.setSesionActiva(false);
+            Sesion actualizar = new Sesion();
+            actualizar.ActualizarSesion(sesion);
+            VistaPrincipal principal = new VistaPrincipal();
+            principal.setVisible(true);
+            this.dispose();
+        } else {
+            VistaRegistrarse registrarse = new VistaRegistrarse();
+            registrarse.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnDerechaMouseClicked
 
     private void btnCatalogo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCatalogo1MouseClicked
-        VistaCatalogo catalogo =  new VistaCatalogo();
+        VistaCatalogo catalogo = new VistaCatalogo();
         catalogo.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCatalogo1MouseClicked
@@ -243,9 +281,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCatalogo1;
+    private javax.swing.JButton btnDerecha;
     private javax.swing.JButton btnGuia;
-    private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JButton btnRegistrarse;
+    private javax.swing.JButton btnIzquierda;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

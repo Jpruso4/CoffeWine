@@ -95,9 +95,9 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnCatalogo1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnIniciarSesion" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnIzquierda" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnRegistrarse" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnDerecha" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -109,8 +109,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblLogo" alignment="3" max="32767" attributes="0"/>
                           <Component id="btnGuia" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnIniciarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnRegistrarse" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnIzquierda" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnDerecha" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCatalogo1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -157,7 +157,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuiaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnIniciarSesion">
+            <Component class="javax.swing.JButton" name="btnIzquierda">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="a4" green="aa" red="bc" type="rgb"/>
@@ -174,10 +174,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnIniciarSesionMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnIzquierdaMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnRegistrarse">
+            <Component class="javax.swing.JButton" name="btnDerecha">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="a4" green="aa" red="bc" type="rgb"/>
@@ -194,7 +194,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRegistrarseMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDerechaMouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnCatalogo1">
