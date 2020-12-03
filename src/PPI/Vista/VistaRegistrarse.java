@@ -256,9 +256,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Hay campos obligatorios sin llenar(*)", "REGISTRARSE", JOptionPane.ERROR_MESSAGE);
         } else {
             if (validacionContrasena == true && validacionCorreo == true) {
-                VistaPrincipal principal = new VistaPrincipal();
-                principal.setVisible(true);
-                dispose();
+                respuesta = controlador.guardarUsuario(usuario);
             } else {
                 JOptionPane.showMessageDialog(null, "Los camplos ingresados son invalidos", "REGISTRARSE", JOptionPane.ERROR_MESSAGE);
             }
