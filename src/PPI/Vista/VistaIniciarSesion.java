@@ -240,7 +240,7 @@ public class VistaIniciarSesion extends javax.swing.JFrame {
             boolean respuesta = controlador.iniciarSesion(usuario);
 
             if (respuesta == true) {
-                JOptionPane.showMessageDialog(null, "Bienvenido a PoliBooks", "INICIAR SESIÓN", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Bienvenido a CoffeWine", "INICIAR SESIÓN", JOptionPane.INFORMATION_MESSAGE);
                 VistaPrincipal principal = new VistaPrincipal();
                 principal.setVisible(true);
                 this.dispose();

@@ -1,1 +1,2 @@
-[{"idUsuario":1,"tipoUsuario":2,"correo":"juan@gmail.com","nick":"Jpruso4","contrasena":"Juanpa44"}]
+[{"idUsuario":1,"tipoUsuario":2,"correo":"juan@gmail.com","nick":"Jpruso4","contrasena":"Juanpa44"},{"idUsuario":2,"tipoUsuario":1,"correo":"admin@gmail.com","nick":"Admin","contrasena":"Admin123"}]
+

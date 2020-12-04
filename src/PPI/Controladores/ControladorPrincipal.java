@@ -12,12 +12,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Personal
  */
 public class ControladorPrincipal {
+
     public File archivo;
     public File archivoLibro;
     Archivo utilArchivo = new Archivo();
@@ -39,5 +42,18 @@ public class ControladorPrincipal {
             return sesionJson.isSesionActiva();
         }
         return false;
+    }
+
+    public int RetornarTipoUsuario(ModeloSesion sesion) {
+        String informacionDelArchivo = utilArchivo.obtenerInformacionArchivo(archivo);
+        ModeloSesion sesionJson = new ModeloSesion();
+
+        if (informacionDelArchivo != null && !informacionDelArchivo.isEmpty()) {
+            Type tipoUsuario = new TypeToken<ModeloSesion>() {
+            }.getType();
+            sesionJson = gson.fromJson(informacionDelArchivo, tipoUsuario);
+            return sesionJson.gettipoUsuario();
+        }
+        return 0;
     }
 }
