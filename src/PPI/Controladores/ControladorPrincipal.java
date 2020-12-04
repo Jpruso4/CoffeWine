@@ -22,7 +22,6 @@ import java.util.List;
 public class ControladorPrincipal {
 
     public File archivo;
-    public File archivoLibro;
     Archivo utilArchivo = new Archivo();
     Gson gson;
 

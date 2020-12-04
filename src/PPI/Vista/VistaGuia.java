@@ -5,6 +5,10 @@
  */
 package PPI.Vista;
 
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Personal
@@ -16,6 +20,10 @@ public class VistaGuia extends javax.swing.JFrame {
      */
     public VistaGuia() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
+        ImageIcon icon = new ImageIcon(System.getProperty("/Imagenes/grano-de-cafe.png"));
+        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
     }
 
     /**
@@ -34,6 +42,7 @@ public class VistaGuia extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Guía - CoffeWine");
 
         jPanel3.setBackground(new java.awt.Color(215, 204, 200));
 
@@ -154,19 +163,9 @@ public class VistaGuia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JLabel lblLogo1;
-    private javax.swing.JLabel lblLogo2;
     private javax.swing.JLabel lblVolver;
-    private javax.swing.JLabel lblVolver1;
-    private javax.swing.JLabel lblVolver2;
     // End of variables declaration//GEN-END:variables
 }

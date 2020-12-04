@@ -5,6 +5,8 @@
  */
 package PPI.Vista;
 
+import PPI.Controladores.ControladorCatalogo;
+import PPI.Modelos.ModeloSesion;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.ImageIcon;
@@ -15,14 +17,27 @@ import javax.swing.ImageIcon;
  */
 public class VistaCatalogo extends javax.swing.JFrame {
 
+    ControladorCatalogo controlador;
+    int tipoUsuario;
+
     /**
      * Creates new form VistaCatalogo
      */
     public VistaCatalogo() {
         initComponents();
 
-        this.setLocationRelativeTo(null);
+        controlador = new ControladorCatalogo(this);
+        ModeloSesion sesion = new ModeloSesion();
+
         this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
+        this.setLocationRelativeTo(null);
+
+        tipoUsuario = controlador.RetornarTipoUsuario(sesion);
+
+        if (tipoUsuario == 1) {
+            this.lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png")));
+            this.lblLogo.setText("Agregar");
+        }
     }
 
     /**
@@ -52,6 +67,11 @@ public class VistaCatalogo extends javax.swing.JFrame {
         lblLogo.setForeground(new java.awt.Color(255, 255, 255));
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png"))); // NOI18N
         lblLogo.setText("CoffeWine");
+        lblLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLogoMouseClicked(evt);
+            }
+        });
 
         lblVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/atras.png"))); // NOI18N
         lblVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -86,7 +106,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogo)
                     .addComponent(jLabel1))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(lblVolver)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -102,7 +122,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 408, Short.MAX_VALUE))
+                .addGap(0, 414, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,6 +144,14 @@ public class VistaCatalogo extends javax.swing.JFrame {
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_lblVolverMouseClicked
+
+    private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
+        if(tipoUsuario == 1){
+            VistaCrudProducto crudProducto = new VistaCrudProducto();
+            crudProducto.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_lblLogoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -167,4 +195,5 @@ public class VistaCatalogo extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblVolver;
     // End of variables declaration//GEN-END:variables
+
 }

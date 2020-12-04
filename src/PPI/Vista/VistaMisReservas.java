@@ -5,6 +5,10 @@
  */
 package PPI.Vista;
 
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Personal
@@ -16,6 +20,10 @@ public class VistaMisReservas extends javax.swing.JFrame {
      */
     public VistaMisReservas() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
+        ImageIcon icon = new ImageIcon(System.getProperty("/Imagenes/grano-de-cafe.png"));
+        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
     }
 
     /**
@@ -34,6 +42,7 @@ public class VistaMisReservas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mis pedidos - CoffeWine");
 
         jPanel1.setBackground(new java.awt.Color(215, 204, 200));
 

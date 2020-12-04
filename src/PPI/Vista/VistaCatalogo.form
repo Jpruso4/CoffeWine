@@ -51,7 +51,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="408" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -86,7 +86,7 @@
                           <Component id="lblLogo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblVolver" min="-2" max="-2" attributes="0"/>
@@ -112,6 +112,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="CoffeWine"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblLogoMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblVolver">
               <Properties>
