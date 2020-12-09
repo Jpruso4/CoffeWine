@@ -5,6 +5,8 @@
  */
 package PPI.Vista;
 
+import PPI.Controladores.ControladorCrudProducto;
+import javafx.stage.FileChooser;
 import javax.swing.ImageIcon;
 
 /**
@@ -13,6 +15,9 @@ import javax.swing.ImageIcon;
  */
 public class VistaCrudProducto extends javax.swing.JFrame {
 
+    ControladorCrudProducto controlador = new ControladorCrudProducto();
+    
+    
     /**
      * Creates new form VistaCrudProducto
      */
@@ -56,6 +61,7 @@ public class VistaCrudProducto extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Crear producto - Coffe Wine");
 
         jPanel1.setBackground(new java.awt.Color(215, 204, 200));
 
@@ -87,7 +93,7 @@ public class VistaCrudProducto extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblVolver)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(135, 135, 135)
                 .addComponent(lblLogo)
@@ -114,6 +120,11 @@ public class VistaCrudProducto extends javax.swing.JFrame {
         btnCargarImagen.setBackground(new java.awt.Color(93, 64, 55));
         btnCargarImagen.setForeground(new java.awt.Color(255, 255, 255));
         btnCargarImagen.setText("Subir imagen");
+        btnCargarImagen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCargarImagenMouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Nombre*");
 
@@ -169,7 +180,7 @@ public class VistaCrudProducto extends javax.swing.JFrame {
                 .addComponent(lblImagenPublicar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addGap(23, 23, 23))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -223,9 +234,9 @@ public class VistaCrudProducto extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblImagenPublicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnCargarImagen))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCargarImagen)
+                    .addComponent(jButton1))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -260,10 +271,14 @@ public class VistaCrudProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void lblVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolverMouseClicked
-        VistaCatalogo catalogo = new VistaCatalogo();
-        catalogo.setVisible(true);
+        VistaProductos productos = new VistaProductos();
+        productos.setVisible(true);
         dispose();
     }//GEN-LAST:event_lblVolverMouseClicked
+
+    private void btnCargarImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCargarImagenMouseClicked
+        
+    }//GEN-LAST:event_btnCargarImagenMouseClicked
 
     /**
      * @param args the command line arguments

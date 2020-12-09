@@ -5,35 +5,22 @@
  */
 package PPI.Vista;
 
-import PPI.Controladores.ControladorCatalogo;
-import PPI.Modelos.ModeloSesion;
-import java.awt.Color;
-import java.awt.Font;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author Personal
  */
-public class VistaCatalogo extends javax.swing.JFrame {
-
-    ControladorCatalogo controlador;
-    int tipoUsuario;
+public class VistaProductos extends javax.swing.JFrame {
 
     /**
-     * Creates new form VistaCatalogo
+     * Creates new form VistaProductos
      */
-    public VistaCatalogo() {
+    public VistaProductos() {
         initComponents();
 
-        controlador = new ControladorCatalogo(this);
-        ModeloSesion sesion = new ModeloSesion();
-
-        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
         this.setLocationRelativeTo(null);
-
-        tipoUsuario = controlador.RetornarTipoUsuario(sesion);
-
+        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
     }
 
     /**
@@ -52,7 +39,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Catalogo - CoffeWine");
+        setTitle("Productos - Coffe Wine");
 
         jPanel1.setBackground(new java.awt.Color(215, 204, 200));
 
@@ -61,8 +48,9 @@ public class VistaCatalogo extends javax.swing.JFrame {
         lblLogo.setBackground(new java.awt.Color(255, 255, 255));
         lblLogo.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         lblLogo.setForeground(new java.awt.Color(255, 255, 255));
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png"))); // NOI18N
-        lblLogo.setText("CoffeWine");
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
+        lblLogo.setText("Agregar");
+        lblLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblLogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblLogoMouseClicked(evt);
@@ -80,7 +68,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Catálogo");
+        jLabel1.setText("Productos");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -135,15 +123,17 @@ public class VistaCatalogo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
+        VistaCrudProducto crudProducto = new VistaCrudProducto();
+        crudProducto.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_lblLogoMouseClicked
+
     private void lblVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolverMouseClicked
         VistaPrincipal principal = new VistaPrincipal();
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_lblVolverMouseClicked
-
-    private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
-       
-    }//GEN-LAST:event_lblLogoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -162,20 +152,20 @@ public class VistaCatalogo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaCatalogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaCatalogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaCatalogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaCatalogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaCatalogo().setVisible(true);
+                new VistaProductos().setVisible(true);
             }
         });
     }
@@ -187,5 +177,4 @@ public class VistaCatalogo extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblVolver;
     // End of variables declaration//GEN-END:variables
-
 }

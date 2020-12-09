@@ -49,13 +49,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
         if (respuestaSesion && tipoUsuario == 1) {
             this.btnDerecha.setText("Cerrar Sesión");
             this.btnIzquierda.setText("Pedidos");
+            this.btnProductos.setVisible(true);
         } else {
             if (respuestaSesion && tipoUsuario == 2) {
                 this.btnDerecha.setText("Cerrar Sesión");
                 this.btnIzquierda.setText("Mis Pedidos");
+                this.btnProductos.setVisible(false);
+
             } else {
                 this.btnDerecha.setText("Regístrate");
                 this.btnIzquierda.setText("Iniciar Sesión");
+                this.btnProductos.setVisible(false);
             }
         }
     }
@@ -73,10 +77,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
-        btnGuia = new javax.swing.JButton();
+        btnProductos = new javax.swing.JButton();
         btnIzquierda = new javax.swing.JButton();
         btnDerecha = new javax.swing.JButton();
         btnCatalogo1 = new javax.swing.JButton();
+        btnGuia1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,19 +108,19 @@ public class VistaPrincipal extends javax.swing.JFrame {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png"))); // NOI18N
         lblLogo.setText("CoffeWine");
 
-        btnGuia.setBackground(new java.awt.Color(188, 170, 164));
-        btnGuia.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        btnGuia.setForeground(new java.awt.Color(0, 0, 0));
-        btnGuia.setText("Guía");
-        btnGuia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGuia.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnProductos.setBackground(new java.awt.Color(188, 170, 164));
+        btnProductos.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        btnProductos.setForeground(new java.awt.Color(0, 0, 0));
+        btnProductos.setText("Productos");
+        btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGuiaMouseClicked(evt);
+                btnProductosMouseClicked(evt);
             }
         });
-        btnGuia.addActionListener(new java.awt.event.ActionListener() {
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuiaActionPerformed(evt);
+                btnProductosActionPerformed(evt);
             }
         });
 
@@ -152,6 +157,22 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnGuia1.setBackground(new java.awt.Color(188, 170, 164));
+        btnGuia1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        btnGuia1.setForeground(new java.awt.Color(0, 0, 0));
+        btnGuia1.setText("Guía");
+        btnGuia1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuia1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuia1MouseClicked(evt);
+            }
+        });
+        btnGuia1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuia1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -159,8 +180,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
-                .addComponent(btnGuia)
+                .addGap(54, 54, 54)
+                .addComponent(btnProductos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuia1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCatalogo1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -175,10 +198,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGuia)
+                    .addComponent(btnProductos)
                     .addComponent(btnIzquierda)
                     .addComponent(btnDerecha)
-                    .addComponent(btnCatalogo1))
+                    .addComponent(btnCatalogo1)
+                    .addComponent(btnGuia1))
                 .addContainerGap())
         );
 
@@ -209,11 +233,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuiaMouseClicked
-        VistaGuia guia = new VistaGuia();
-        guia.setVisible(true);
+    private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
+        VistaProductos productos = new VistaProductos();
+        productos.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnGuiaMouseClicked
+    }//GEN-LAST:event_btnProductosMouseClicked
 
     private void btnIzquierdaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIzquierdaMouseClicked
         if (respuestaSesion && tipoUsuario == 2) {
@@ -222,7 +246,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
             this.dispose();
         } else {
             if (respuestaSesion && tipoUsuario == 1) {
-                VistaReservasAdmin reservasAdmin = new  VistaReservasAdmin();
+                VistaReservasAdmin reservasAdmin = new VistaReservasAdmin();
                 reservasAdmin.setVisible(true);
                 this.dispose();
             } else {
@@ -255,9 +279,19 @@ public class VistaPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCatalogo1MouseClicked
 
-    private void btnGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiaActionPerformed
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuiaActionPerformed
+    }//GEN-LAST:event_btnProductosActionPerformed
+
+    private void btnGuia1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuia1MouseClicked
+        VistaGuia guia = new VistaGuia();
+        guia.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnGuia1MouseClicked
+
+    private void btnGuia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuia1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuia1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,8 +331,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCatalogo1;
     private javax.swing.JButton btnDerecha;
-    private javax.swing.JButton btnGuia;
+    private javax.swing.JButton btnGuia1;
     private javax.swing.JButton btnIzquierda;
+    private javax.swing.JButton btnProductos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
