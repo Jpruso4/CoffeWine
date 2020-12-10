@@ -5,11 +5,21 @@
  */
 package PPI.Vista;
 
-import PPI.Controladores.ControladorProductos;
 import PPI.Controladores.ControladorProductosCatalogo;
 import PPI.Modelos.ModeloProducto;
 import PPI.Modelos.ModeloReserva;
+import PPI.Utils.Sesion;
 import java.awt.Image;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -22,7 +32,9 @@ public class VistaProductosCatalogo extends javax.swing.JDialog {
 
     boolean respuestaGuardado;
     ModeloProducto productoAMostrar;
-    ModeloReserva productoAGuardar;
+    ModeloReserva reservaAGuardar;
+    ModeloReserva reservaSeleccionado;
+    boolean esModificacion;
     int idDelProducto;
     ControladorProductosCatalogo productos = new ControladorProductosCatalogo();
 
@@ -40,6 +52,21 @@ public class VistaProductosCatalogo extends javax.swing.JDialog {
         Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
         lblImagen.setText(null);
         lblImagen.setIcon(icono);
+    }
+
+    public VistaProductosCatalogo(ModeloReserva reservaModificado) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
+        esModificacion = true;
+        reservaSeleccionado = reservaModificado;
+        lblNombreProducto.setText(reservaModificado.getNombreProducto());
+        txtCantidad.setText(reservaModificado.getCantidadDeReserva());
+        ImageIcon icon = new ImageIcon(System.getProperty("user.dir") + reservaModificado.getImagen());
+        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
+        lblImagen.setText(null);
+        lblImagen.setIcon(icono);
+        btnReserva.setText("Modificar");
     }
 
     public VistaProductosCatalogo(java.awt.Frame parent, boolean modal) {
@@ -71,6 +98,7 @@ public class VistaProductosCatalogo extends javax.swing.JDialog {
         txtCantidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Reservar - Coffe Wine");
 
         jPanel1.setBackground(new java.awt.Color(215, 204, 200));
 
@@ -204,7 +232,39 @@ public class VistaProductosCatalogo extends javax.swing.JDialog {
             String cantidad = txtCantidad.getText();
             respuestaGuardado = productos.guardarReserva(idDelProducto, cantidad);
             if (respuestaGuardado) {
-                JOptionPane.showMessageDialog(null, "El pedido se ha hecho exitosamente", "RESERVAR PRODUCTO", JOptionPane.INFORMATION_MESSAGE);
+                Properties propiedades = new Properties();
+                propiedades.setProperty("mail smtp host", "smtp gmail com");
+                propiedades.setProperty("mail.smtp.starttls.enable", "true");
+                propiedades.setProperty("mail smtp port", "587");
+                propiedades.setProperty("mail.smtp.auth", "true");  
+
+                Session session = Session.getDefaultInstance(propiedades);
+
+                String correoEnvia = "juanpablo01282002@gmail.com";
+                String contrasena = "marcelayesneider";
+                String destinatario = "juanpablo01282002@gmail.com";
+                String asunto = "Probando correos";
+                String mensaje = "PRobando funcion";
+
+                MimeMessage mail = new MimeMessage(session);
+                try {
+                    mail.setFrom(new InternetAddress(correoEnvia));
+                    mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+                    mail.setSubject(asunto);
+                    mail.setText(mensaje);
+
+                    Transport transporte = session.getTransport("smtp");
+                    transporte.connect(correoEnvia, contrasena);
+                    transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+                    transporte.close();
+
+                    JOptionPane.showMessageDialog(null, "La confirmacion del reserva se ha notificado en tu correo", "RESERVAR PRODUCTO", JOptionPane.INFORMATION_MESSAGE);
+
+                } catch (AddressException ex) {
+                    Logger.getLogger(VistaProductosCatalogo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (MessagingException ex) {
+                    Logger.getLogger(VistaProductosCatalogo.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 VistaCatalogo catalogo = new VistaCatalogo();
                 catalogo.setVisible(true);
                 dispose();

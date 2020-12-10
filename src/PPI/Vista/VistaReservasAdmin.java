@@ -5,25 +5,41 @@
  */
 package PPI.Vista;
 
+import PPI.Controladores.ControladorReservasAdmin;
+import PPI.Modelos.ModeloReserva;
+import PPI.Vistas.Interfaces.InterfazReservasAdmin;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Personal
  */
-public class VistaReservasAdmin extends javax.swing.JFrame {
+public class VistaReservasAdmin extends javax.swing.JFrame implements InterfazReservasAdmin{
+
+    ControladorReservasAdmin controlador;
+    boolean respuestaReserva;
+    ModeloReserva reservaModificado = new ModeloReserva();
 
     /**
      * Creates new form VistaReservasAdmin
      */
     public VistaReservasAdmin() {
         initComponents();
+        
+        controlador = new ControladorReservasAdmin(this);
+         
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
-        ImageIcon icon = new ImageIcon(System.getProperty("/Imagenes/grano-de-cafe.png"));
-        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        
+        List<ModeloReserva> reserva = controlador.VerificarReservas();
+        if (reserva != null) {
+            VistaGenericaReservasAdmin controlGenerico = new VistaGenericaReservasAdmin(reserva, this);
+            controlGenerico.crearReservas(this);
+        }
     }
 
     /**
@@ -35,16 +51,15 @@ public class VistaReservasAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         lblLogo1 = new javax.swing.JLabel();
         lblVolver1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanelPedidos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pedidos de Usuarios - CoffeWine");
-
-        jPanel3.setBackground(new java.awt.Color(215, 204, 200));
 
         jPanel5.setBackground(new java.awt.Color(93, 64, 55));
 
@@ -93,28 +108,24 @@ public class VistaReservasAdmin extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 414, Short.MAX_VALUE))
-        );
+        jPanelPedidos.setBackground(new java.awt.Color(215, 204, 200));
+        jPanelPedidos.setForeground(new java.awt.Color(215, 204, 200));
+        jPanelPedidos.setLayout(new java.awt.GridLayout(0, 1));
+        jScrollPane1.setViewportView(jPanelPedidos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,12 +171,75 @@ public class VistaReservasAdmin extends javax.swing.JFrame {
             }
         });
     }
+    
+    public javax.swing.JPanel getJPanelScroll(){
+        return jPanelPedidos;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelPedidos;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLogo1;
     private javax.swing.JLabel lblVolver1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setTextLblImagenPublicar(String texto) {
+    }
+
+    @Override
+    public void setIconLblImagenPublicar(Icon icono) {
+    }
+
+    @Override
+    public void setTextLblNombreProducto(String texto) {
+    }
+
+    @Override
+    public void setTextLblCantidadDeReserva(String texto) {
+    }
+
+    @Override
+    public void setTextLblCorreo(String texto) {
+    }
+
+    @Override
+    public void setTextLblPrecio(String texto) {
+    }
+
+    @Override
+    public int getWidthImagen() {
+        return 0;
+    }
+
+    @Override
+    public int getHeightImagen() {
+        return 0;
+    }
+
+    @Override
+    public void reservaClickedModificar(int idReserva) {
+        reservaModificado = controlador.ObtenerReservaModificar(idReserva);
+        VistaProductosCatalogo ProductosCatalogo = new VistaProductosCatalogo(reservaModificado);
+        ProductosCatalogo.setVisible(true);
+        this.dispose();
+    }
+
+    @Override
+    public void reservaClickedEliminar(int idReserva) {
+         int resp = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere eliminar el producto?", "ELIMINAR PRODUCTO", JOptionPane.OK_CANCEL_OPTION);
+        if (JOptionPane.OK_OPTION == resp) {
+            ModeloReserva reservaEliminado = new ModeloReserva();
+            reservaEliminado.setIdReserva(idReserva);
+            boolean eliminado = controlador.EliminarReserva(reservaEliminado.getIdReserva());
+            if (eliminado) {
+                JOptionPane.showMessageDialog(null, "El producto ha sido eliminado con éxito", "ELIMINAR PRODUCTO", JOptionPane.INFORMATION_MESSAGE);
+                VistaReservasAdmin vistaReservasAdmin = new VistaReservasAdmin();
+                vistaReservasAdmin.setVisible(true);
+                this.dispose();
+            }
+        }
+    }
 }

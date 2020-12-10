@@ -6,7 +6,7 @@
 package PPI.Vista;
 
 import PPI.Modelos.ModeloReserva;
-import PPI.Vistas.Interfaces.InterfazMisReservas;
+import PPI.Vistas.Interfaces.InterfazReservasAdmin;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.util.List;
@@ -19,6 +19,62 @@ import javax.swing.ImageIcon;
  */
 public class VistaGenericaReservasAdmin extends javax.swing.JPanel {
 
+    List<ModeloReserva> listaModeloReserva;
+    VistaReservasAdmin vista;
+    InterfazReservasAdmin listenerControlador;
+
+    private int IdReservaPublicado;
+
+    public VistaGenericaReservasAdmin(List<ModeloReserva> listaModeloReservas, VistaReservasAdmin context) {
+        this.listaModeloReserva = listaModeloReservas;
+        vista = context;
+    }
+
+    public VistaGenericaReservasAdmin(String texto, String imagen, String cantidad, String correo, String precio, int idReserva, InterfazReservasAdmin listener) {
+        initComponents();
+        listenerControlador = listener;
+        setNombrePoducto(texto);
+        setImagenProducto(imagen);
+        setCantidad(cantidad);
+        setCorreo(correo);
+        setPrecio(precio);
+        IdReservaPublicado = idReserva;
+    }
+
+    public void crearReservas(InterfazReservasAdmin listener) {
+        for (int i = 0; i < listaModeloReserva.size(); i++) {
+            VistaGenericaReservasAdmin reservasAdmin = new VistaGenericaReservasAdmin(listaModeloReserva.get(i).getNombreProducto(), listaModeloReserva.get(i).getImagen(), listaModeloReserva.get(i).getCantidadDeReserva(), listaModeloReserva.get(i).getCorreo(), listaModeloReserva.get(i).getPrecio(), listaModeloReserva.get(i).getIdReserva(),listener);
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.NORTH;
+            gbc.weighty = 1;
+            vista.getJPanelScroll().add(reservasAdmin, gbc);
+        }
+
+        vista.getJPanelScroll().updateUI();
+    }
+
+    private void setNombrePoducto(String texto) {
+        lblNombreProducto.setText(texto);
+    }
+
+    private void setImagenProducto(String imagen) {
+        ImageIcon icon = new ImageIcon(System.getProperty("user.dir") + imagen);
+        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        lblImagenProductos.setIcon(icono);
+    }
+
+    private void setCantidad(String cantidad) {
+        lblCantidad.setText(cantidad);
+    }
+
+    private void setPrecio(String precio) {
+        lblRefencia.setText(precio);
+    }
+   
+
+    private void setCorreo(String correo) {
+        lblCorreo.setText(correo);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,93 +85,124 @@ public class VistaGenericaReservasAdmin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblModificarMIsPublicaciones = new javax.swing.JLabel();
+        lblImagenProductos = new javax.swing.JLabel();
+        lblNombreProducto = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JLabel();
-        lblImagenMisPulicaciones = new javax.swing.JLabel();
-        lblTituloMisPublicaciones = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lblDescripcionMisPublicaciones = new javax.swing.JTextArea();
+        lblRefencia = new javax.swing.JLabel();
+        lblCantidad = new javax.swing.JLabel();
+        lblCorreo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(197, 225, 165));
-        setForeground(new java.awt.Color(197, 225, 165));
+        setBackground(new java.awt.Color(215, 204, 200));
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        setForeground(new java.awt.Color(215, 204, 200));
 
-        lblModificarMIsPublicaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edit24.png"))); // NOI18N
-        lblModificarMIsPublicaciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblModificarMIsPublicacionesMouseClicked(evt);
-            }
-        });
+        lblImagenProductos.setText("Imagen");
+
+        lblNombreProducto.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNombreProducto.setForeground(new java.awt.Color(0, 0, 0));
+        lblNombreProducto.setText("Nombre del Producto");
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete24.png"))); // NOI18N
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEliminarMouseClicked(evt);
             }
         });
 
-        lblImagenMisPulicaciones.setText("Imagen");
+        lblRefencia.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblRefencia.setText("Referecia");
 
-        lblTituloMisPublicaciones.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblTituloMisPublicaciones.setForeground(new java.awt.Color(0, 0, 0));
-        lblTituloMisPublicaciones.setText("Titulo de libro");
+        lblCantidad.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblCantidad.setText("Cantidad");
 
-        lblDescripcionMisPublicaciones.setEditable(false);
-        lblDescripcionMisPublicaciones.setBackground(new java.awt.Color(197, 225, 165));
-        lblDescripcionMisPublicaciones.setColumns(20);
-        lblDescripcionMisPublicaciones.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblDescripcionMisPublicaciones.setRows(5);
-        jScrollPane1.setViewportView(lblDescripcionMisPublicaciones);
+        lblCorreo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblCorreo.setText("Precio");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel1.setText("Referencia:");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel2.setText("Cantidad:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel3.setText("Correo:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addComponent(lblImagenMisPulicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(lblImagenProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblModificarMIsPublicaciones)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar)
-                        .addGap(13, 13, 13))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreProducto)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblRefencia)))
+                        .addGap(0, 130, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTituloMisPublicaciones)
-                        .addContainerGap(223, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCorreo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEliminar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCantidad)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTituloMisPublicaciones)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblModificarMIsPublicaciones, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(lblImagenMisPulicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblImagenProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblNombreProducto)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblRefencia)
+                                .addComponent(jLabel1))
+                            .addGap(4, 4, 4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(lblCantidad))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(lblCorreo)))
+                        .addComponent(btnEliminar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblModificarMIsPublicacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblModificarMIsPublicacionesMouseClicked
-    }//GEN-LAST:event_lblModificarMIsPublicacionesMouseClicked
-
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        listenerControlador.reservaClickedEliminar(IdReservaPublicado);
     }//GEN-LAST:event_btnEliminarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnEliminar;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea lblDescripcionMisPublicaciones;
-    private javax.swing.JLabel lblImagenMisPulicaciones;
-    private javax.swing.JLabel lblModificarMIsPublicaciones;
-    private javax.swing.JLabel lblTituloMisPublicaciones;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblCorreo;
+    private javax.swing.JLabel lblImagenProductos;
+    private javax.swing.JLabel lblNombreProducto;
+    private javax.swing.JLabel lblRefencia;
     // End of variables declaration//GEN-END:variables
 }

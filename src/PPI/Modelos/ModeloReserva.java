@@ -24,7 +24,7 @@ public class ModeloReserva {
         this.idReserva = idReserva;
     }
 
-    public int getIdProducto() {
+   public int getIdProducto() {
         return idProducto;
     }
 

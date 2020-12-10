@@ -8,7 +8,6 @@ package PPI.Vista;
 import PPI.Controladores.ControladorProductos;
 import PPI.Modelos.ModeloProducto;
 import PPI.Vistas.Interfaces.InterfazProductos;
-import java.awt.Color;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -33,7 +32,6 @@ public class VistaProductos extends javax.swing.JFrame implements InterfazProduc
 
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
-        this.getContentPane().setBackground(Color.WHITE);
         
         List<ModeloProducto> productos = controlador.VerificarProductos();
         if( productos != null){
