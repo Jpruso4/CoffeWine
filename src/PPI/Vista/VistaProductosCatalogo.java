@@ -19,7 +19,7 @@ public class VistaProductosCatalogo extends javax.swing.JDialog {
 
     ModeloProducto productoAMostrar;
     int idDelProducto;
-    ControladorProductos productos = new ControladorProductos();
+    //ControladorProductos productos = new ControladorProductos();
 
     public VistaProductosCatalogo(java.awt.Frame parent, boolean modal, int idLibro) {
         super(parent, modal);

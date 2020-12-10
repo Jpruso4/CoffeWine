@@ -5,22 +5,41 @@
  */
 package PPI.Vista;
 
+import PPI.Controladores.ControladorProductos;
+import PPI.Modelos.ModeloProducto;
+import PPI.Vistas.Interfaces.InterfazProductos;
+import java.awt.Color;
+import java.util.List;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Personal
  */
-public class VistaProductos extends javax.swing.JFrame {
+public class VistaProductos extends javax.swing.JFrame implements InterfazProductos{
 
+    ControladorProductos controlador;
+    boolean respuestaProducto;
+    ModeloProducto productoModificado =  new ModeloProducto();
     /**
      * Creates new form VistaProductos
      */
     public VistaProductos() {
         initComponents();
+        
+        controlador = new ControladorProductos(this);
 
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
+        this.getContentPane().setBackground(Color.WHITE);
+        
+        List<ModeloProducto> productos = controlador.VerificarProductos();
+        if( productos != null){
+            VistaGenericaProductos controlGenerico = new VistaGenericaProductos(productos, this);
+            controlGenerico.crearProductos(this);
+        }
     }
 
     /**
@@ -32,28 +51,27 @@ public class VistaProductos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        lblLogo = new javax.swing.JLabel();
+        lblAgregar = new javax.swing.JLabel();
         lblVolver = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanelProductos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Productos - Coffe Wine");
 
-        jPanel1.setBackground(new java.awt.Color(215, 204, 200));
-
         jPanel4.setBackground(new java.awt.Color(93, 64, 55));
 
-        lblLogo.setBackground(new java.awt.Color(255, 255, 255));
-        lblLogo.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
-        lblLogo.setForeground(new java.awt.Color(255, 255, 255));
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
-        lblLogo.setText("Agregar");
-        lblLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        lblAgregar.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
+        lblAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        lblAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
+        lblAgregar.setText("Agregar");
+        lblAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblLogoMouseClicked(evt);
+                lblAgregarMouseClicked(evt);
             }
         });
 
@@ -80,7 +98,7 @@ public class VistaProductos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(182, 182, 182)
-                .addComponent(lblLogo)
+                .addComponent(lblAgregar)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -88,7 +106,7 @@ public class VistaProductos extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLogo)
+                    .addComponent(lblAgregar)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -96,44 +114,40 @@ public class VistaProductos extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 414, Short.MAX_VALUE))
-        );
+        jPanelProductos.setBackground(new java.awt.Color(215, 204, 200));
+        jPanelProductos.setForeground(new java.awt.Color(215, 204, 200));
+        jPanelProductos.setLayout(new java.awt.GridLayout(0, 1));
+        jScrollPane2.setViewportView(jPanelProductos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
-        VistaCrudProducto crudProducto = new VistaCrudProducto();
-        crudProducto.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_lblLogoMouseClicked
 
     private void lblVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolverMouseClicked
         VistaPrincipal principal = new VistaPrincipal();
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_lblVolverMouseClicked
+
+    private void lblAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarMouseClicked
+        VistaCrudProducto crudProducto = new VistaCrudProducto();
+        crudProducto.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_lblAgregarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -169,12 +183,75 @@ public class VistaProductos extends javax.swing.JFrame {
             }
         });
     }
+    
+    public javax.swing.JPanel getJPanelScroll(){
+        return jPanelProductos;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JLabel lblLogo;
+    private javax.swing.JPanel jPanelProductos;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblAgregar;
     private javax.swing.JLabel lblVolver;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setTextLblImagenPublicar(String texto) {
+    }
+
+    @Override
+    public void setIconLblImagenPublicar(Icon icono) {
+    }
+
+    @Override
+    public void setTextLblNombreProducto(String texto) {
+    }
+
+    @Override
+    public void setTextLblCantidad(String texto) {
+    }
+
+    @Override
+    public void setTextLblReferencia(String texto) {
+    }
+
+    @Override
+    public void setTextLblPrecio(String texto) {
+    }
+
+    @Override
+    public int getWidthImagen() {
+        return 0;
+    }
+
+    @Override
+    public int getHeightImagen() {
+        return 0;
+    }
+
+    @Override
+    public void productoClickedModificar(int idProducto) {
+        productoModificado = controlador.ObtenerProductoModificar(idProducto);
+        VistaCrudProducto agregarProducto = new VistaCrudProducto(productoModificado);
+        agregarProducto.setVisible(true);
+        this.dispose();
+    }
+
+    @Override
+    public void productoClickedEliminar(int idProducto) {
+         int resp = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere eliminar el producto?", "ELIMINAR PRODUCTO", JOptionPane.OK_CANCEL_OPTION);
+        if (JOptionPane.OK_OPTION == resp) {
+            ModeloProducto productoEliminado = new ModeloProducto();
+            productoEliminado.setIdProducto(idProducto);
+            boolean eliminado = controlador.EliminarProducto(productoEliminado.getIdProducto());
+            if (eliminado) {
+                JOptionPane.showMessageDialog(null, "El producto ha sido eliminado con éxito", "ELIMINAR PRODUCTO", JOptionPane.INFORMATION_MESSAGE);
+                VistaProductos productos = new VistaProductos();
+                productos.setVisible(true);
+                this.dispose();
+            }
+        }
+    }
 }

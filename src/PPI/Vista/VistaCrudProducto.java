@@ -6,18 +6,24 @@
 package PPI.Vista;
 
 import PPI.Controladores.ControladorCrudProducto;
+import PPI.Modelos.ModeloProducto;
+import PPI.Vistas.Interfaces.InterfazSubirProducto;
+import java.awt.Image;
 import javafx.stage.FileChooser;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Personal
  */
-public class VistaCrudProducto extends javax.swing.JFrame {
+public class VistaCrudProducto extends javax.swing.JFrame implements InterfazSubirProducto {
 
-    ControladorCrudProducto controlador = new ControladorCrudProducto();
-    
-    
+    ControladorCrudProducto controlador = new ControladorCrudProducto(this);
+    boolean esModificacion;
+    ModeloProducto productoSeleccionado = new ModeloProducto();
+
     /**
      * Creates new form VistaCrudProducto
      */
@@ -31,6 +37,26 @@ public class VistaCrudProducto extends javax.swing.JFrame {
         placeHolder = new TextPrompt("Ingresa la referencia del producto", txtReferencia);
         placeHolder = new TextPrompt("Ingresa el precio del producto", txtPrecio);
 
+        productoSeleccionado = new ModeloProducto();
+
+    }
+
+    public VistaCrudProducto(ModeloProducto productoModificado) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
+        esModificacion = true;
+        productoSeleccionado = productoModificado;
+        txtNombre.setText(productoModificado.getNombreProducto());
+        txtCantidad.setText(productoModificado.getCantidad());
+        txtPrecio.setText(productoModificado.getPrecio());
+        txtReferencia.setText(productoModificado.getReferencia());
+        ImageIcon icon = new ImageIcon(System.getProperty("user.dir") + productoModificado.getImagen());
+        Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lblImagenPublicar.getWidth(), lblImagenPublicar.getHeight(), Image.SCALE_DEFAULT));
+        lblImagenPublicar.setText(null);
+        lblImagenPublicar.setIcon(icono);
+        lblNombVentana.setText("Modificar Producto");
+        btnCrearProducto.setText("Modificar");
     }
 
     /**
@@ -46,14 +72,14 @@ public class VistaCrudProducto extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lblVolver = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblNombVentana = new javax.swing.JLabel();
         lblImagenPublicar = new javax.swing.JLabel();
         btnCargarImagen = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCrearProducto = new javax.swing.JButton();
         txtCantidad = new javax.swing.JTextField();
         txtReferencia = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
@@ -81,10 +107,10 @@ public class VistaCrudProducto extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Agregar Producto");
+        lblNombVentana.setBackground(new java.awt.Color(255, 255, 255));
+        lblNombVentana.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblNombVentana.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombVentana.setText("Agregar Producto");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -94,7 +120,7 @@ public class VistaCrudProducto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblVolver)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lblNombVentana)
                 .addGap(135, 135, 135)
                 .addComponent(lblLogo)
                 .addContainerGap())
@@ -105,7 +131,7 @@ public class VistaCrudProducto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogo)
-                    .addComponent(jLabel1))
+                    .addComponent(lblNombVentana))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(lblVolver)
@@ -134,9 +160,14 @@ public class VistaCrudProducto extends javax.swing.JFrame {
 
         jLabel5.setText("Precio*");
 
-        jButton1.setBackground(new java.awt.Color(93, 64, 55));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Crear Producto");
+        btnCrearProducto.setBackground(new java.awt.Color(93, 64, 55));
+        btnCrearProducto.setForeground(new java.awt.Color(255, 255, 255));
+        btnCrearProducto.setText("Crear Producto");
+        btnCrearProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearProductoActionPerformed(evt);
+            }
+        });
 
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +204,7 @@ public class VistaCrudProducto extends javax.swing.JFrame {
                 .addGap(120, 120, 120)
                 .addComponent(btnCargarImagen)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnCrearProducto)
                 .addGap(135, 135, 135))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
@@ -236,7 +267,7 @@ public class VistaCrudProducto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCargarImagen)
-                    .addComponent(jButton1))
+                    .addComponent(btnCrearProducto))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -271,14 +302,57 @@ public class VistaCrudProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void lblVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolverMouseClicked
-        VistaProductos productos = new VistaProductos();
-        productos.setVisible(true);
-        dispose();
+        if (esModificacion) {
+            int resp = JOptionPane.showConfirmDialog(null, "Desea volver sin modificar el producto?", "MODIFICAR PRODUCTO", JOptionPane.OK_CANCEL_OPTION);
+            if (JOptionPane.OK_OPTION == resp) {
+                VistaProductos productos = new VistaProductos();
+                productos.setVisible(true);
+                dispose();
+            }
+        } else {
+            int resp = JOptionPane.showConfirmDialog(null, "Desea volver sin agregar un producto?", "AGREGAR PRODUCTO", JOptionPane.OK_CANCEL_OPTION);
+            if (JOptionPane.OK_OPTION == resp) {
+                VistaProductos productos = new VistaProductos();
+                productos.setVisible(true);
+                dispose();
+            }
+        }
     }//GEN-LAST:event_lblVolverMouseClicked
 
     private void btnCargarImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCargarImagenMouseClicked
-        
+        controlador.capturarImagen();
     }//GEN-LAST:event_btnCargarImagenMouseClicked
+
+    private void btnCrearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearProductoActionPerformed
+        ModeloProducto producto = new ModeloProducto();
+        producto.setNombreProducto(txtNombre.getText());
+        producto.setCantidad(txtCantidad.getText());
+        producto.setPrecio(txtPrecio.getText());
+        producto.setReferencia(txtReferencia.getText());
+        if (esModificacion) {
+            producto.setIdProducto(productoSeleccionado.getIdProducto());
+            producto.setImagen(productoSeleccionado.getImagen());
+            boolean modificarProducto = controlador.guardarProducto(producto, esModificacion);
+            if (modificarProducto) {
+                JOptionPane.showMessageDialog(null, "El producto se ha modificado con éxito", "MODIFICAR PRODUCTO", JOptionPane.INFORMATION_MESSAGE);
+                VistaProductos productos = new VistaProductos();
+                productos.setVisible(true);
+                this.dispose();
+            }
+        } else {
+            if (txtNombre.getText().isEmpty() || txtCantidad.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtReferencia.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Hay campos obligatorios sin llenar(*)", "AGREGAR PRODUCTO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                boolean guardarLibro = controlador.guardarProducto(producto, esModificacion);
+                if (guardarLibro) {
+                    JOptionPane.showMessageDialog(null, "El producto se ha guardado con éxito", "PUBLICAR PRODUCTO", JOptionPane.INFORMATION_MESSAGE);
+                    VistaProductos productos = new VistaProductos();
+                    productos.setVisible(true);
+                    this.dispose();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnCrearProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,8 +391,7 @@ public class VistaCrudProducto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCargarImagen;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnCrearProducto;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -328,10 +401,31 @@ public class VistaCrudProducto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblImagenPublicar;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblNombVentana;
     private javax.swing.JLabel lblVolver;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtReferencia;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setTextLblImagenPublicar(String texto) {
+        lblImagenPublicar.setText(texto);
+    }
+
+    @Override
+    public void setIconLblImagenPublicar(Icon icono) {
+        lblImagenPublicar.setIcon(icono);
+    }
+
+    @Override
+    public int getWidthImagen() {
+        return lblImagenPublicar.getWidth();
+    }
+
+    @Override
+    public int getHeightImagen() {
+        return lblImagenPublicar.getHeight();
+    }
 }

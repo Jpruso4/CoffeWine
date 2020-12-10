@@ -8,7 +8,7 @@ public class ModeloProducto {
     
     int idProducto;
     String nombreProducto;
-    int cantidad;
+    String cantidad;
     String referencia;
     String precio;
     String imagen;
@@ -29,11 +29,11 @@ public class ModeloProducto {
         this.nombreProducto = nombreProducto;
     }
 
-    public int getCantidad() {
+    public String getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
 
