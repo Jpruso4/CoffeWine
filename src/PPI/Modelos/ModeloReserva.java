@@ -6,14 +6,23 @@
  */
 public class ModeloReserva {
     
+    int idReserva;
     int idProducto;
     int idUsuario;
-    int cantidadDeReserva;
+    String cantidadDeReserva;
     String correo;
     String nombreProducto;
     String referencia;
     String precio;
     String imagen;
+
+    public int getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
+    }
 
     public int getIdProducto() {
         return idProducto;
@@ -31,11 +40,11 @@ public class ModeloReserva {
         this.idUsuario = idUsuario;
     }
 
-    public int getCantidadDeReserva() {
+    public String getCantidadDeReserva() {
         return cantidadDeReserva;
     }
 
-    public void setCantidadDeReserva(int cantidadDeReserva) {
+    public void setCantidadDeReserva(String cantidadDeReserva) {
         this.cantidadDeReserva = cantidadDeReserva;
     }
 

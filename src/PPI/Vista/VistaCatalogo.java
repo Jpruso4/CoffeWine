@@ -6,19 +6,28 @@
 package PPI.Vista;
 
 import PPI.Controladores.ControladorCatalogo;
+import PPI.Modelos.ModeloProducto;
 import PPI.Modelos.ModeloSesion;
+import PPI.Vistas.Interfaces.InterfazCatalogo;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.util.List;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Personal
  */
-public class VistaCatalogo extends javax.swing.JFrame {
+public class VistaCatalogo extends javax.swing.JFrame implements InterfazCatalogo {
 
+    public File inicio;
     ControladorCatalogo controlador;
     int tipoUsuario;
+    boolean respuestaSesion;
+    ModeloProducto productoAMostrar = new ModeloProducto();
 
     /**
      * Creates new form VistaCatalogo
@@ -26,14 +35,20 @@ public class VistaCatalogo extends javax.swing.JFrame {
     public VistaCatalogo() {
         initComponents();
 
+        inicio = new File("iniciosesion.txt");
+
         controlador = new ControladorCatalogo(this);
         ModeloSesion sesion = new ModeloSesion();
 
         this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
         this.setLocationRelativeTo(null);
 
-        tipoUsuario = controlador.RetornarTipoUsuario(sesion);
-
+        respuestaSesion = controlador.VerificarSesion(sesion);
+        List<ModeloProducto> productos = controlador.MostrarProducto();
+        if (productos != null) {
+            VistaGenericaCatalogo controlGenerico = new VistaGenericaCatalogo(productos, this);
+            controlGenerico.crearProductos(this);
+        }
     }
 
     /**
@@ -45,16 +60,15 @@ public class VistaCatalogo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lblVolver = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanelCatalogo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Catalogo - CoffeWine");
-
-        jPanel1.setBackground(new java.awt.Color(215, 204, 200));
 
         jPanel4.setBackground(new java.awt.Color(93, 64, 55));
 
@@ -108,28 +122,24 @@ public class VistaCatalogo extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 414, Short.MAX_VALUE))
-        );
+        jPanelCatalogo.setBackground(new java.awt.Color(215, 204, 200));
+        jPanelCatalogo.setForeground(new java.awt.Color(215, 204, 200));
+        jPanelCatalogo.setLayout(new java.awt.GridLayout(0, 4));
+        jScrollPane1.setViewportView(jPanelCatalogo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,7 +152,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
     }//GEN-LAST:event_lblVolverMouseClicked
 
     private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
-       
+
     }//GEN-LAST:event_lblLogoMouseClicked
 
     /**
@@ -180,12 +190,49 @@ public class VistaCatalogo extends javax.swing.JFrame {
         });
     }
 
+    public javax.swing.JPanel getPanelScroll() {
+        return jPanelCatalogo;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelCatalogo;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblVolver;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setTextLblImagenPrincipal(String texto) {
+    }
+
+    @Override
+    public void setIconLblImagenPrincipal(Icon icono) {
+    }
+
+    @Override
+    public void setTextLblTituloPrincipal(String texto) {
+    }
+
+    @Override
+    public int getWidthImagen() {
+        return 0;
+    }
+
+    @Override
+    public int getHeightImagen() {
+        return 0;
+    }
+
+    @Override
+    public void productoClicked(int idProducto) {
+        if (respuestaSesion) {
+            VistaProductosCatalogo mostrar = new VistaProductosCatalogo(this, false, idProducto);
+            mostrar.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe iniciar sesión primero para reservar el producto", "CATALOGO", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
 }

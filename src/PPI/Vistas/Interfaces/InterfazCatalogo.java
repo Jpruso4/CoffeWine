@@ -5,10 +5,23 @@
  */
 package PPI.Vistas.Interfaces;
 
+import javax.swing.Icon;
+
 /**
  *
  * @author Personal
  */
 public interface InterfazCatalogo {
-    
+
+    public void setTextLblImagenPrincipal(String texto);
+
+    public void setIconLblImagenPrincipal(Icon icono);
+
+    public void setTextLblTituloPrincipal(String texto);
+
+    public int getWidthImagen();
+
+    public int getHeightImagen();
+
+    public void productoClicked(int idProducto);
 }
