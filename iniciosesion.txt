@@ -1,1 +1,1 @@
-{"sesionActiva":true,"idUsuario":2,"tipoUsuario":1,"Nick":"Admin","Correo":"admin@gmail.com"}
+{"sesionActiva":false,"idUsuario":0,"tipoUsuario":0}

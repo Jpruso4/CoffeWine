@@ -21,7 +21,6 @@ import javax.swing.JOptionPane;
 public class VistaReservasAdmin extends javax.swing.JFrame implements InterfazReservasAdmin{
 
     ControladorReservasAdmin controlador;
-    boolean respuestaReserva;
     ModeloReserva reservaModificado = new ModeloReserva();
 
     /**
@@ -229,13 +228,13 @@ public class VistaReservasAdmin extends javax.swing.JFrame implements InterfazRe
 
     @Override
     public void reservaClickedEliminar(int idReserva) {
-         int resp = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere eliminar el producto?", "ELIMINAR PRODUCTO", JOptionPane.OK_CANCEL_OPTION);
+         int resp = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere eliminar el pedido?", "ELIMINAR PEDIDO", JOptionPane.OK_CANCEL_OPTION);
         if (JOptionPane.OK_OPTION == resp) {
             ModeloReserva reservaEliminado = new ModeloReserva();
             reservaEliminado.setIdReserva(idReserva);
             boolean eliminado = controlador.EliminarReserva(reservaEliminado.getIdReserva());
             if (eliminado) {
-                JOptionPane.showMessageDialog(null, "El producto ha sido eliminado con éxito", "ELIMINAR PRODUCTO", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El pedido ha sido eliminado con éxito", "ELIMINAR PEDIDO", JOptionPane.INFORMATION_MESSAGE);
                 VistaReservasAdmin vistaReservasAdmin = new VistaReservasAdmin();
                 vistaReservasAdmin.setVisible(true);
                 this.dispose();

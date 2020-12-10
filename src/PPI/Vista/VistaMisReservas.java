@@ -5,25 +5,42 @@
  */
 package PPI.Vista;
 
+import PPI.Controladores.ControladorMisReservas;
+import PPI.Modelos.ModeloReserva;
+import PPI.Vistas.Interfaces.InterfazMisReservas;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Personal
  */
-public class VistaMisReservas extends javax.swing.JFrame {
+public class VistaMisReservas extends javax.swing.JFrame implements InterfazMisReservas{
+
+    ControladorMisReservas controlador;
+    ModeloReserva reservaModificado = new ModeloReserva();
 
     /**
      * Creates new form VistaMisReservas
      */
     public VistaMisReservas() {
         initComponents();
+        
+        controlador = new ControladorMisReservas(this);
+                
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/grano-de-cafe.png")).getImage());
         ImageIcon icon = new ImageIcon(System.getProperty("/Imagenes/grano-de-cafe.png"));
         Icon icono = new ImageIcon(icon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        
+        List<ModeloReserva> reserva = controlador.VerificarReservas();
+        if (reserva != null) {
+            VistaGenericaMisReservas controlGenerico = new VistaGenericaMisReservas(reserva, this);
+            controlGenerico.crearReservas(this);
+        }
     }
 
     /**
@@ -35,16 +52,15 @@ public class VistaMisReservas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lblVolver = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanelMisPedidos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mis pedidos - CoffeWine");
-
-        jPanel1.setBackground(new java.awt.Color(215, 204, 200));
 
         jPanel4.setBackground(new java.awt.Color(93, 64, 55));
 
@@ -93,28 +109,24 @@ public class VistaMisReservas extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 414, Short.MAX_VALUE))
-        );
+        jPanelMisPedidos.setBackground(new java.awt.Color(215, 204, 200));
+        jPanelMisPedidos.setForeground(new java.awt.Color(215, 204, 200));
+        jPanelMisPedidos.setLayout(new java.awt.GridLayout(0, 1));
+        jScrollPane1.setViewportView(jPanelMisPedidos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,12 +172,75 @@ public class VistaMisReservas extends javax.swing.JFrame {
             }
         });
     }
-
+    public javax.swing.JPanel getJPanelScroll(){
+        return jPanelMisPedidos;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelMisPedidos;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblVolver;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setTextLblImagenPublicar(String texto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setIconLblImagenPublicar(Icon icono) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setTextLblNombreProducto(String texto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setTextLblCantidadDeReserva(String texto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setTextLblPrecio(String texto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getWidthImagen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getHeightImagen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reservaClickedModificar(int idReserva) {
+        reservaModificado = controlador.ObtenerReservaModificar(idReserva);
+        VistaProductosCatalogo ProductosCatalogo = new VistaProductosCatalogo(reservaModificado);
+        ProductosCatalogo.setVisible(true);
+        this.dispose();
+    }
+
+    @Override
+    public void reservaClickedEliminar(int idReserva) {
+        int resp = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere eliminar el pedido?", "ELIMINAR PEDIDO", JOptionPane.OK_CANCEL_OPTION);
+        if (JOptionPane.OK_OPTION == resp) {
+            ModeloReserva reservaEliminado = new ModeloReserva();
+            reservaEliminado.setIdReserva(idReserva);
+            boolean eliminado = controlador.EliminarReserva(reservaEliminado.getIdReserva());
+            if (eliminado) {
+                JOptionPane.showMessageDialog(null, "El pedido ha sido eliminado con éxito", "ELIMINAR PEDIDO", JOptionPane.INFORMATION_MESSAGE);
+                VistaMisReservas vistaMisReservas = new VistaMisReservas();
+                vistaMisReservas.setVisible(true);
+                this.dispose();
+            }
+        }
+    }
 }

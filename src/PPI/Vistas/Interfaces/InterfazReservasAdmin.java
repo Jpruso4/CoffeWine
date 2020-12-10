@@ -21,9 +21,9 @@ public interface InterfazReservasAdmin {
 
     public void setTextLblCantidadDeReserva(String texto);
 
-    public void setTextLblCorreo(String texto);
-
     public void setTextLblPrecio(String texto);
+
+    public void setTextLblCorreo(String texto);
 
     public int getWidthImagen();
 
